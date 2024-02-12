@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coffeemachine</title>
+    <link rel="icon" type="image/x-icon" href="cafe-outline.svg">
+
+    <style>
+      body {
+        margin: auto;
+        padding: 0;
+        margin-top: 1em;
+        background-color: lavender;
+      }
+
+      .text-box {
+        width: 35rem;
+        margin: auto;
+        margin-top: 10rem;
+        font-size: 1.8rem;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        color: rgb(95, 95, 95);
+        text-align: center;
+        line-height: 3rem;
+      }
+
+      .coffeemachine {
+        width: 20em;
+        margin: auto;
+        margin-top: 5rem;
+      }
+      .top-side {
+        background-color: lightgray;
+        display: flex;
+        justify-content: space-between;
+        height: 6em;
+        margin: auto;
+        padding: 0;
+        border-radius: 2px 2px 2em 2em;
+      }
+      .buttons {
+        margin-top: 2em;
+        display: flex;
+        position: relative;
+        justify-content: flex-start;
+      }
+
+      .button {
+        justify-content: flex-start;
+        margin-left: 1em;
+        margin-top: -1%;
+      }
+
+      .circle {
+        position: relative;
+        height: 2em;
+        width: 2em;
+        background-color: black;
+        border-radius: 1.5em;
+      }
+
+      .rect {
+        position: absolute;
+        height: 1em;
+        width: 0.7em;
+        background-color: gray;
+        margin-left: 10%;
+        margin-top: 30%;
+      }
+
+      .green-circle {
+        border: 3px solid aqua;
+        border-radius: 2em;
+        width: 3em;
+        height: 3em;
+        margin: auto 0;
+        margin-left: -19%;
+        position: relative;
+        background-color: aquamarine;
+      }
+      .rects {
+        height: 1.5em;
+        width: 2em;
+        margin-top: 3%;
+        padding-right: 1%;
+        position: relative;
+        margin-right: 0;
+        display: flex;
+      }
+
+      .rectangle {
+        background-color: gray;
+        width: 20%;
+        height: 100%;
+        margin-left: 10%;
+        position: relative;
+      }
+
+      .middle-side {
+        width: 15em;
+        height: 10em;
+        position: relative;
+        margin: auto;
+        padding: 0;
+        justify-content: center;
+        background-color: rgb(179, 179, 179);
+      }
+
+      .tube {
+        width: 8em;
+        height: 2em;
+        margin-left: 6em;
+        margin-top: 0;
+      }
+
+      .top-side-tube {
+        background-color: black;
+        width: 3em;
+        height: 1em;
+      }
+
+      .middle-side-tube {
+        display: flex;
+      }
+
+      .left {
+        background-color: black;
+        width: 2.3em;
+        height: 1em;
+        margin-left: 0.4em;
+        border-radius: 0% 0% 50% 50%;
+      }
+
+      .middle {
+        background-color: gray;
+        width: 0.75em;
+        height: 5px;
+        margin-left: -5%;
+        justify-content: center;
+        margin: auto 0;
+        margin-top: 3px;
+      }
+
+      .right {
+        background-color: black;
+        width: 3em;
+        height: 0.75em;
+        border-radius: 0 0;
+        margin-top: -2px;
+      }
+      .bottom-side-tube {
+        background-color: black;
+        width: 8%;
+        height: 0.75em;
+        margin-left: 1.15em;
+        margin-top: -1%;
+      }
+
+      .steam-coffee {
+        display: flex;
+        position: absolute;
+        margin: 0 auto;
+        margin-left: 33%;
+        justify-content: center;
+      }
+
+      .steam {
+        background-color: rgba(245, 245, 245, 0.329);
+        height: 1.5em;
+        width: 0.85em;
+        border-radius: 0.5em;
+        margin: 0.15em;
+        opacity: 0;
+        animation-name: steam-flow;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+      }
+
+      #coffee {
+        background-color: rgb(155, 57, 0);
+        width: 0.4em;
+        height: 7em;
+        margin: 0;
+        margin-top: 11px;
+        animation-duration: 3s;
+      }
+
+      #first-steam {
+        animation-delay: 1s;
+      }
+
+      #second-steam {
+        animation-delay: 2.5s;
+        animation-duration: 2s;  
+      }
+
+      #third-steam {
+        animation-delay: 2s;
+      }
+
+      #fourth-steam {
+        animation-delay: 1.5s;
+        animation-duration: 2s;
+      }
+
+      .background {
+        background-color: rgb(77, 76, 76);
+        width: 11em;
+        height: 5em;
+        justify-content: bottom;
+        margin: 0 auto;
+        margin-top: 20%;
+        display: flex;
+        border-radius: 1em 1em 0 0;
+      }
+
+      .cup {
+        background-color: white;
+        width: 5em;
+        height: 3em;
+        margin: auto;
+        margin-bottom: 0;
+        border-radius: 0 0 70px 70px / 0 0 110px 110px;
+        position: relative;
+      }
+
+      .cup-holder {
+        position: absolute;
+        background-color: none;
+        border: 7px solid white;
+        width: 1.3em;
+        height: 1.3em;
+        border-radius: 2em;
+        margin-left: 47%;
+        margin-top: 15%;
+      }
+
+      .table {
+        background-color: aquamarine;
+        width: 18em;
+        height: 1em;
+        margin: 0 auto;
+        border-radius: 1em;
+      }
+
+      .desk {
+        background-color: black;
+        width: 20em;
+        height:1.5em;
+      }
+
+      #butt {
+        position: absolute;
+        width: 1.7em;
+        height: 1.7em;
+        border-radius: 1.7em;
+        margin: 0;
+        padding: 0;
+        margin-top: -36%;
+        margin-left: 2%;
+        background-color: rgba(0, 0, 0, 0);
+        border-color: rgba(0, 0, 0, 0);
+      }
+
+
+      @media only screen and (max-width: 700px) {
+        .text-box {
+          font-size: 1.3rem;
+          width: 25rem;
+          line-height: 2.2rem;
+
+        }
+
+        .coffeemachine {
+          margin-top: 3zrem;
+        }
+
+
+      }
+
+      @media only screen and (max-width: 550px) {
+        .text-box {
+          font-size: 1rem;
+          width: 20rem;
+          margin-top: 7rem;
+        }
+       
+        .coffeemachine {
+          width: 15em;
+        }
+        .top-side {
+          height: 4em;
+          border-radius: 1px 1px 1em 1em;
+        }
+        .buttons {
+          margin-top: 1em;
+        }
+        
+        .button {
+          margin-left: 0.5em;
+          margin-top: -1%;
+        }
+
+      .circle {
+        height: 1.5em;
+        width: 1.5em;
+        border-radius: 1.5em;
+      }
+      
+      .rect {
+        height: 1em;
+        width: 0.5em;
+        margin-left: 12%;
+      }
+      
+      .green-circle {
+        width: 2em;
+        height: 2em;
+        margin-left: -12%;
+      }
+
+
+      .rects {
+        height: 1.3em;
+      }
+
+
+      .middle-side {
+        width: 13em;
+        height: 8em;
+      }
+
+      .tube {
+        width: 4.3em;
+        height: 1em;
+        margin-left: 5.3em;
+      }
+
+      .top-side-tube {
+        width: 2.5em;
+        height: 0.75em;
+      }
+
+
+      .left {
+        width: 2.3em;
+        height: 0.8em;
+      }
+
+      .middle {
+        width: 0.75em;
+        height: 5px;
+        margin-left: -5%;
+        margin: auto 0;
+        margin-top: 3px;
+      }
+
+      .right {
+        background-color: black;
+        width: 2em;
+        height: 0.5em;
+        margin-top: 1px;
+      }
+
+
+
+
+      .bottom-side-tube {
+        width: 8%;
+        height: 0.5em;
+      }
+
+      .steam-coffee {
+      }
+
+      .steam {
+        height: 1.3em;
+        width: 0.5em;
+        border-radius: 0.5em;
+      }
+
+      #coffee {
+        width: 0.3em;
+        height: 5em;
+        margin-left: 9.5px;
+        margin-top: 15px;
+      }
+
+      .background {
+        width: 11em;
+        height: 4em;
+        margin-top: 23%;
+      }
+
+      .cup {
+        width: 4em;
+        height: 2em;
+      }
+
+      .cup-holder {
+        width: 1em;
+        height: 1em;
+        border: 0.3em solid white;
+        border-radius: 1em;
+        margin-left: 6.9em;   
+        margin-top: 2.2em     
+      }
+
+      .table {
+        width: 14em;
+        height: 1em;
+      }
+
+      .desk {
+        width: 15em;
+        height:1em;
+      }
+
+      #butt {
+        height: 1.5em;
+        width: 1.5em;
+        border-radius: 1.5em;
+  
+      }
+
+      }
+
+      @keyframes flow {
+        from {
+          height: 0;
+        }
+        to {
+          height: 7em;
+        }
+      }
+
+      @keyframes flow-back {
+        from {
+          height: 7em;
+          margin-top: 1em;
+        }
+        to {
+          margin-top: 7em;
+          height: 0em;
+        }
+      }
+
+      @keyframes steam-flow {
+        from {
+          margin-top: 5em;
+          opacity: 50%;
+        }
+        to {
+          margin-top: 0;
+          opacity: 0%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="text-box">
+      <p>Hi! <br/> In this project I have made a coffeemachine with HTML and CSS and also animated the hot coffee.
+        If you press the first black button you can turn on and off the coffee.
+      </p>
+    </div>
+
+    <div class="coffeemachine">
+
+    <div class="top-side">
+      <div class="buttons">
+        <div class="button">
+          <div class="rect"></div>
+          <div class="circle"></div>
+          <button id="butt"></button>
+        </div>
+        <div class="button">
+          <div class="rect"></div>
+          <div class="circle"></div>
+        </div>
+      </div>
+
+      <div class="green-circle"></div>
+      <div class="rects">
+        <div class="rectangle">
+          <div class="black-circle"></div>
+        </div>
+        <div class="rectangle"></div>
+        <div class="rectangle"></div>
+      </div>
+    </div>
+
+    <div class="middle-side">
+      <div class="tube">
+        <div class="top-side-tube"></div>
+        <div class="middle-side-tube">
+          <div class="left"></div>
+          <div class="middle"></div>
+          <div class="right"></div>
+        </div>
+        <div class="bottom-side-tube"></div>
+      </div>
+
+      <div class="steam-coffee">
+        <div class="steam" id="first-steam"></div>
+        <div class="steam" id="second-steam"></div>
+        <div id="coffee"></div>
+        <div class="steam" id="third-steam"></div>
+        <div class="steam" id="fourth-steam"></div>
+      </div>
+
+      <div class="background">
+        <div class="cup"></div>
+        <div class="cup-holder"></div>
+      </div>
+    </div>
+
+    <div class="table"></div>
+    <div class="desk"></div>
+  </div>
+
+    <script>
+      const butt = document.getElementById("butt");
+      const coffee = document.getElementById("coffee");
+      let isAnimating = false;
+
+      butt.addEventListener("click", () => {
+        if (isAnimating) {
+          coffee.style.animationName = "flow";
+          coffee.style.height = "5em";
+        } else {
+          coffee.style.animationName = "flow-back";
+          coffee.style.height = "0";
+        }
+        isAnimating = !isAnimating;
+      });
+    </script>
+  </body>
+</html>
